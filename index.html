@@ -2,15 +2,15 @@
 <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
 <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 <script>
-   AFRAME.registerComponent('markerhandler', {
-    init: function () {
-      this.el.sceneEl.addEventListener('markerFound', () => {
-        // redirect to custom URL
-        //window.location = 'https://github.com/AR-js-org/AR.js';
-        document.getElementById("takePhotoBtn").disabled = false;
-      });
-    }
-   });
+    var initFunc = function () {
+        var marker = this.el;
+        this.el.sceneEl.addEventListener('markerFound', (evt) => {
+            alert(marker.id);        
+            document.getElementById("takePhotoBtn").disabled = false;
+        });
+    };
+   AFRAME.registerComponent('markerhandler',  {init: initFunc});
+   AFRAME.registerComponent('markerhandler2', {init: initFunc});
 </script>
 
 <!-- style for the loader -->
@@ -63,7 +63,7 @@
   </div>
 
   <div class="buttons">
-    <button id="takePhotoBtn" class="take-photo-btn" disabled="true" onclick="window.location.href='https://github.com/AR-js-org/AR.js';">Take Photo!</button>
+    <button id="takePhotoBtn" class="take-photo-btn" disabled="true">Take Photo!</button>
   </div>
 
   <!-- a-frame scene -->
@@ -77,8 +77,27 @@
     <!-- on 'url' use the path to the Image Descriptors created before. -->
     <!-- the path should end with the name without the extension e.g. if file is 'pinball.fset' the path should end with 'pinball' -->
     <a-nft markerhandler 
+      id="kyabetu"
       type="nft"
       url="210909_kyabetu"
+      emitevents="true"
+      smooth="true"
+      smoothCount="10"
+      smoothTolerance=".01"
+      smoothThreshold="5"
+    >
+        <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
+        <a-entity
+          gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+              scale="5 5 5"
+              position="100 100 0"
+          >
+        </a-entity>
+    </a-nft>
+    <a-nft markerhandler2
+      id="tanashiasta"
+      type="nft"
+      url="210909_tanashiasta"
       emitevents="true"
       smooth="true"
       smoothCount="10"

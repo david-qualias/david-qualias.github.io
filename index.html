@@ -5,12 +5,14 @@
     var initFunc = function () {
         var marker = this.el;
         this.el.sceneEl.addEventListener('markerFound', (evt) => {
-            alert(marker.id);        
+            alert(evt.srcElement.id);        
             document.getElementById("takePhotoBtn").disabled = false;
         });
     };
    AFRAME.registerComponent('markerhandler',  {init: initFunc});
    AFRAME.registerComponent('markerhandler2', {init: initFunc});
+   AFRAME.registerComponent('markerhandler3', {init: initFunc});
+   AFRAME.registerComponent('markerhandler4', {init: initFunc});
 </script>
 
 <!-- style for the loader -->
@@ -112,6 +114,42 @@
           >
         </a-entity>
     </a-nft>
+    <a-nft markerhandler3
+    id="tamarokutokagakukan"
+    type="nft"
+    url="210909_tamarokutokagakukan"
+    emitevents="true"
+    smooth="true"
+    smoothCount="10"
+    smoothTolerance=".01"
+    smoothThreshold="5"
+  >
+      <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
+      <a-entity
+        gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+            scale="5 5 5"
+            position="100 100 0"
+        >
+      </a-entity>
+  </a-nft>
+  <a-nft markerhandler4
+    id="syakisyakitaisou"
+    type="nft"
+    url="210909_syakisyakitaisou"
+    emitevents="true"
+    smooth="true"
+    smoothCount="10"
+    smoothTolerance=".01"
+    smoothThreshold="5"
+  >
+      <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
+      <a-entity
+        gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+            scale="5 5 5"
+            position="100 100 0"
+        >
+      </a-entity>
+  </a-nft>
     <!-- static camera that moves according to the device movemenents -->
     <a-entity camera></a-entity>
   </a-scene>

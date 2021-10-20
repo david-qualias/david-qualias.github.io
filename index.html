@@ -2,17 +2,22 @@
 <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
 <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 <script>
+    var currentMarker = "";
     var initFunc = function () {
         var marker = this.el;
-        this.el.sceneEl.addEventListener('markerFound', (evt) => {
-            alert(evt.srcElement.id);        
-            document.getElementById("takePhotoBtn").disabled = false;
+        this.el.sceneEl.addEventListener('markerFound', (evt) => { //event is triggered for all markers when a marker is found
+            var id = evt.target.id;
+            if(id!=currentMarker) { //do work once when new maeker found
+                alert(evt.target.id);
+                currentMarker = id;
+                document.getElementById("takePhotoBtn").disabled = false;
+            }       
         });
     };
    AFRAME.registerComponent('markerhandler',  {init: initFunc});
-   AFRAME.registerComponent('markerhandler2', {init: initFunc});
-   AFRAME.registerComponent('markerhandler3', {init: initFunc});
-   AFRAME.registerComponent('markerhandler4', {init: initFunc});
+//    AFRAME.registerComponent('markerhandler2', {init: initFunc});
+//    AFRAME.registerComponent('markerhandler3', {init: initFunc});
+//    AFRAME.registerComponent('markerhandler4', {init: initFunc});
 </script>
 
 <!-- style for the loader -->
@@ -96,7 +101,7 @@
           >
         </a-entity>
     </a-nft>
-    <a-nft markerhandler2
+    <a-nft markerhandler
       id="tanashiasta"
       type="nft"
       url="210909_tanashiasta"
@@ -114,7 +119,7 @@
           >
         </a-entity>
     </a-nft>
-    <a-nft markerhandler3
+    <a-nft markerhandler
     id="tamarokutokagakukan"
     type="nft"
     url="210909_tamarokutokagakukan"
@@ -132,7 +137,7 @@
         >
       </a-entity>
   </a-nft>
-  <a-nft markerhandler4
+  <a-nft markerhandler
     id="syakisyakitaisou"
     type="nft"
     url="210909_syakisyakitaisou"
@@ -150,6 +155,114 @@
         >
       </a-entity>
   </a-nft>
+  <a-nft markerhandler
+  id="skytowernishitokyo"
+  type="nft"
+  url="210909_skytowernishitokyo"
+  emitevents="true"
+  smooth="true"
+  smoothCount="10"
+  smoothTolerance=".01"
+  smoothThreshold="5"
+>
+    <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
+    <a-entity
+      gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+          scale="5 5 5"
+          position="100 100 0"
+      >
+    </a-entity>
+</a-nft>
+<a-nft markerhandler
+  id="shitanoyaiseki"
+  type="nft"
+  url="210909_shitanoyaiseki"
+  emitevents="true"
+  smooth="true"
+  smoothCount="10"
+  smoothTolerance=".01"
+  smoothThreshold="5"
+>
+    <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
+    <a-entity
+      gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+          scale="5 5 5"
+          position="100 100 0"
+      >
+    </a-entity>
+</a-nft>
+<a-nft markerhandler
+  id="shiminsai"
+  type="nft"
+  url="210909_shiminsai"
+  emitevents="true"
+  smooth="true"
+  smoothCount="10"
+  smoothTolerance=".01"
+  smoothThreshold="5"
+>
+    <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
+    <a-entity
+      gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+          scale="5 5 5"
+          position="100 100 0"
+      >
+    </a-entity>
+</a-nft>
+<a-nft markerhandler
+  id="seibusinnjukusentanashieki"
+  type="nft"
+  url="210909_seibusinnjukusentanashieki"
+  emitevents="true"
+  smooth="true"
+  smoothCount="10"
+  smoothTolerance=".01"
+  smoothThreshold="5"
+>
+    <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
+    <a-entity
+      gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+          scale="5 5 5"
+          position="100 100 0"
+      >
+    </a-entity>
+</a-nft>
+<a-nft markerhandler
+  id="nishitokyoikoinomorikouen"
+  type="nft"
+  url="210909_nishitokyoikoinomorikouen"
+  emitevents="true"
+  smooth="true"
+  smoothCount="10"
+  smoothTolerance=".01"
+  smoothThreshold="5"
+>
+    <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
+    <a-entity
+      gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+          scale="5 5 5"
+          position="100 100 0"
+      >
+    </a-entity>
+</a-nft>
+<a-nft markerhandler
+  id="houyanashi"
+  type="nft"
+  url="210909_houyanashi"
+  emitevents="true"
+  smooth="true"
+  smoothCount="10"
+  smoothTolerance=".01"
+  smoothThreshold="5"
+>
+    <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
+    <a-entity
+      gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+          scale="5 5 5"
+          position="100 100 0"
+      >
+    </a-entity>
+</a-nft>
     <!-- static camera that moves according to the device movemenents -->
     <a-entity camera></a-entity>
   </a-scene>

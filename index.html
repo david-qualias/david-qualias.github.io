@@ -1,23 +1,30 @@
 <!-- import aframe and then ar.js with image tracking / location based features -->
-<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
 <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 <script>
     var currentMarker = "";
     var initFunc = function () {
         var marker = this.el;
+
+        //create aentity element with attributes append to marker
+        var aentity = document.createElement('a-entity')
+        aentity.setAttribute('gltf-model', 'asta.gltf');
+        aentity.setAttribute('scale', '15 15 15');
+        aentity.setAttribute('rotation', '0 -90 90');
+        aentity.setAttribute('position', '0 0 0');
+        marker.appendChild(aentity);
+
         this.el.sceneEl.addEventListener('markerFound', (evt) => { //event is triggered for all markers when a marker is found
             var id = evt.target.id;
             if(id!=currentMarker) { //do work once when new maeker found
-                alert(evt.target.id);
+                //alert(evt.target.id);
                 currentMarker = id;
                 document.getElementById("takePhotoBtn").disabled = false;
             }       
         });
     };
    AFRAME.registerComponent('markerhandler',  {init: initFunc});
-//    AFRAME.registerComponent('markerhandler2', {init: initFunc});
-//    AFRAME.registerComponent('markerhandler3', {init: initFunc});
-//    AFRAME.registerComponent('markerhandler4', {init: initFunc});
+
 </script>
 
 <!-- style for the loader -->
@@ -93,12 +100,6 @@
       smoothTolerance=".01"
       smoothThreshold="5"
     >
-        <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
-        <a-entity obj-model=”obj: url(asta.obj); mtl: url(asta.mtl)”
-              scale="5 5 5"
-              position="100 100 0"
-          >
-        </a-entity>
     </a-nft>
     <a-nft markerhandler
       id="tanashiasta"
@@ -110,13 +111,6 @@
       smoothTolerance=".01"
       smoothThreshold="5"
     >
-        <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
-        <a-entity
-          obj-model=”obj: url(asta.obj); mtl: url(asta.mtl)”
-              scale="5 5 5"
-              position="100 100 0"
-          >
-        </a-entity>
     </a-nft>
     <a-nft markerhandler
     id="tamarokutokagakukan"
@@ -130,7 +124,7 @@
   >
       <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
       <a-entity
-        obj-model=”obj: url(asta.obj); mtl: url(asta.mtl)”
+        gltf-model="asta.gltf"
             scale="5 5 5"
             position="100 100 0"
         >
@@ -148,7 +142,7 @@
   >
       <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
       <a-entity
-        obj-model=”obj: url(asta.obj); mtl: url(asta.mtl)”
+        gltf-model="asta.gltf"
             scale="5 5 5"
             position="100 100 0"
         >
@@ -166,7 +160,7 @@
 >
     <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
     <a-entity
-      obj-model=”obj: url(asta.obj); mtl: url(asta.mtl)”
+      gltf-model="asta.gltf"
           scale="5 5 5"
           position="100 100 0"
       >
@@ -184,7 +178,7 @@
 >
     <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
     <a-entity
-      obj-model=”obj: url(asta.obj); mtl: url(asta.mtl)”
+      gltf-model="asta.gltf"
           scale="5 5 5"
           position="100 100 0"
       >
@@ -202,7 +196,7 @@
 >
     <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
     <a-entity
-      obj-model=”obj: url(asta.obj); mtl: url(asta.mtl)”
+      gltf-model="asta.gltf"
           scale="5 5 5"
           position="100 100 0"
       >
@@ -220,7 +214,7 @@
 >
     <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
     <a-entity
-      obj-model=”obj: url(asta.obj); mtl: url(asta.mtl)”
+      gltf-model="asta.gltf"
           scale="5 5 5"
           position="100 100 0"
       >
@@ -238,7 +232,7 @@
 >
     <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
     <a-entity
-      obj-model=”obj: url(asta.obj); mtl: url(asta.mtl)”
+      gltf-model="asta.gltf"
           scale="5 5 5"
           position="100 100 0"
       >
@@ -256,7 +250,7 @@
 >
     <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
     <a-entity
-      obj-model=”obj: url(asta.obj); mtl: url(asta.mtl)”
+      gltf-model="asta.gltf"
           scale="5 5 5"
           position="100 100 0"
       >
@@ -274,7 +268,7 @@
 >
     <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
     <a-entity
-      obj-model=”obj: url(asta.obj); mtl: url(asta.mtl)”
+      gltf-model="asta.gltf"
           scale="5 5 5"
           position="100 100 0"
       >

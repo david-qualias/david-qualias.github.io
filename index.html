@@ -1,58 +1,250 @@
-<!DOCTYPE html>
-
-<script src="https://kit.fontawesome.com/c9500776a0.js" crossorigin="anonymous"></script>
+<!-- import aframe and then ar.js with image tracking / location based features -->
+<script src="https://aframe.io/releases/1.0.4/aframe.min.js" crossorigin="anonymous"></script>
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js" crossorigin="anonymous"></script>
 <script>
-  function addScene() {
-    var scene = document.createElement("iframe")
-    scene.setAttribute("src", "arjs_scene.html")
-    scene.setAttribute("height", "300")
-    scene.setAttribute("width", "300")
-    scene.setAttribute("allow", "camera")
-    document.querySelector("#cameradiv").appendChild(scene)
-  }
+    var currentMarker = "";
+
+    document.addEventListener("DOMContentLoaded", function(event) { 
+      var version = "0.0.9";
+      document.getElementById("versionText").innerHTML = version;
+    });
+    
+
+    var initFunc = function () {
+        var marker = this.el;
+
+        //create aentity element with attributes append to marker
+        var aentity = document.createElement('a-entity')
+        aentity.setAttribute('gltf-model', 'asta.gltf');
+        aentity.setAttribute('scale', '20 20 20');
+        aentity.setAttribute('rotation', '0 -90 90');
+        aentity.setAttribute('position', '0 0 100');
+        marker.appendChild(aentity);
+
+        console.log("scene id: " + this.el.sceneEl);
+
+        this.el.sceneEl.addEventListener('markerFound', (evt) => { //event is triggered for all markers when a marker is found
+            var id = evt.target.id;
+            console.log("found id: " + marker.id);
+
+            if(id!=currentMarker) { //do work once when new maeker found
+               // alert(evt.target.id);
+                currentMarker = id;
+                document.getElementById("takePhotoBtn").disabled = false;
+            }       
+        });
+    };
+   AFRAME.registerComponent('markerhandler',  {init: initFunc});
+
 </script>
+
+<!-- style for the loader -->
 <style>
-    div {
-      align-items: center;
+  .arjs-loader {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .arjs-loader div {
+    text-align: center;
+    font-size: 1.25em;
+    color: white;
+  }
+  .buttons {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5em;
+      display: flex;
       justify-content: center;
-      margin: auto;
-      width: 50%;
-    }
-    iframe{
-      width:800px;
-      height:800px;
-      border-width: 0px;
-    }
-    /* div,
-    body,
-    html {
-        height: 100%;
-        width: 100%;
-    } */
-    body{
-        height:100%;
-        width: 100%;
+      align-items: center;
+      z-index: 10;
     }
 
-    #menu a {
+    .take-photo-btn {
+      padding: 0.25em;
+      border-radius: 4px;
+      border: none;
+      background: white;
+      color: black;
+      width: 20em;
+      height: 10em;
+    }
+
+    #versionText {
+      text-align: center;
+      font-size: 2em;
+      color: white;
       display: block;
+      width: 100px;
+      height: 20px;
+      padding: 10px;
     }
-
 </style>
 
-<body>
-    <div id="menu">
-      <button onclick="addScene()" style="display: block;">
-        <p>
-          Add ar.js scene !
-        </p>
-        </button>
-        <p></p>
-        <div id="cameradiv">
-
-        </div>
-        <iframe src="arjs_scene.html" allow="camera"></iframe>
-      </div>
-
+<body style="margin : 0px; overflow: hidden;">
+  <!-- minimal loader shown until image descriptors are loaded. Loading may take a while according to the device computational power -->
+  <div class="arjs-loader">
+    <div>Loading, please wait...</div>
+  </div>
+  <div class="buttons">
+    <button id="takePhotoBtn" class="take-photo-btn" disabled="true">Take Photo!</button>
+    <div id='versionText'></div>
+  </div>
+  <div id="myEmbeddedScene">
+  <!-- a-frame scene -->
+  <a-scene
+    vr-mode-ui="enabled: false;"
+    renderer="logarithmicDepthBuffer: true;"
+    embedded
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+  >
+    <!-- a-nft is the anchor that defines an Image Tracking entity -->
+    <!-- on 'url' use the path to the Image Descriptors created before. -->
+    <!-- the path should end with the name without the extension e.g. if file is 'pinball.fset' the path should end with 'pinball' -->
+    
+    <!-- <a-nft markerhandler 
+      id="kyabetu"
+      type="nft"
+      url="210909_kyabetu"
+      emitevents="true"
+      smooth="true"
+      smoothCount="10"
+      smoothTolerance=".01"
+      smoothThreshold="5"
+    >
+    </a-nft> -->
+    <a-nft markerhandler
+      id="tanashiasta"
+      type="nft"
+      url="./210909_tanashiasta"
+      emitevents="true"
+      smooth="true"
+      smoothCount="10"
+      smoothTolerance=".01"
+      smoothThreshold="5"
+    ></a-nft>
+    <a-nft markerhandler
+      id="go!"
+      type="nft"
+      url="./go"
+      emitevents="true"
+      smooth="true"
+      smoothCount="10"
+      smoothTolerance=".01"
+      smoothThreshold="5"
+    >
+    </a-nft>
+    <!-- <a-nft markerhandler
+    id="tamarokutokagakukan"
+    type="nft"
+    url="210909_tamarokutokagakukan"
+    emitevents="true"
+    smooth="true"
+    smoothCount="10"
+    smoothTolerance=".01"
+    smoothThreshold="5"
+  >
+  </a-nft>
+  <a-nft markerhandler
+    id="syakisyakitaisou"
+    type="nft"
+    url="210909_syakisyakitaisou"
+    emitevents="true"
+    smooth="true"
+    smoothCount="10"
+    smoothTolerance=".01"
+    smoothThreshold="5"
+  >
+  </a-nft>
+  <a-nft markerhandler
+  id="skytowernishitokyo"
+  type="nft"
+  url="210909_skytowernishitokyo"
+  emitevents="true"
+  smooth="true"
+  smoothCount="10"
+  smoothTolerance=".01"
+  smoothThreshold="5"
+>
+</a-nft> -->
+<!-- <a-nft markerhandler
+  id="shitanoyaiseki"
+  type="nft"
+  url="210909_shitanoyaiseki"
+  emitevents="true"
+  smooth="true"
+  smoothCount="10"
+  smoothTolerance=".01"
+  smoothThreshold="5"
+>
+</a-nft>
+<a-nft markerhandler
+  id="shiminsai"
+  type="nft"
+  url="210909_shiminsai"
+  emitevents="true"
+  smooth="true"
+  smoothCount="10"
+  smoothTolerance=".01"
+  smoothThreshold="5"
+>
+</a-nft>
+<a-nft markerhandler
+  id="seibusinnjukusentanashieki"
+  type="nft"
+  url="210909_seibusinnjukusentanashieki"
+  emitevents="true"
+  smooth="true"
+  smoothCount="10"
+  smoothTolerance=".01"
+  smoothThreshold="5"
+>
+</a-nft>
+<a-nft markerhandler
+  id="nishitokyoikoinomorikouen"
+  type="nft"
+  url="210909_nishitokyoikoinomorikouen"
+  emitevents="true"
+  smooth="true"
+  smoothCount="10"
+  smoothTolerance=".01"
+  smoothThreshold="5"
+>
+</a-nft>
+<a-nft markerhandler
+  id="houyanashi"
+  type="nft"
+  url="210909_houyanashi"
+  emitevents="true"
+  smooth="true"
+  smoothCount="10"
+  smoothTolerance=".01"
+  smoothThreshold="5"
+>
+</a-nft>
+<a-nft markerhandler
+  id="image001"
+  type="nft"
+  url="image001"
+  emitevents="true"
+  smooth="true"
+  smoothCount="10"
+  smoothTolerance=".01"
+  smoothThreshold="5"
+>
+</a-nft> -->
+    <!-- static camera that moves according to the device movemenents -->
+    <!-- <a-entity camera></a-entity> -->
+  </a-scene>
+</div>
 </body>
-</html>

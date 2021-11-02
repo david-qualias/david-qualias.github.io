@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<script src="https://kit.fontawesome.com/c9500776a0.js" crossorigin="anonymous"></script>
+<script>
+  function addScene() {
+    var scene = document.createElement("iframe")
+    scene.setAttribute("src", "arjs_scene.html")
+    scene.setAttribute("height", "300")
+    scene.setAttribute("width", "300")
+    scene.setAttribute("allow", "camera")
+    document.querySelector("#cameradiv").appendChild(scene)
+  }
+</script>
+<style>
+    div {
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      width: 50%;
+    }
+    iframe{
+      width:800px;
+      height:800px;
+      border-width: 0px;
+    }
+    /* div,
+    body,
+    html {
+        height: 100%;
+        width: 100%;
+    } */
+    body{
+        height:100%;
+        width: 100%;
+    }
+
+    #menu a {
+      display: block;
+    }
+
+</style>
+
+<body>
+    <div id="menu">
+      <button onclick="addScene()" style="display: block;">
+        <p>
+          Add ar.js scene !
+        </p>
+        </button>
+        <p></p>
+        <div id="cameradiv">
+
+        </div>
+        <!-- <iframe src="arjs_scene.html" allow="camera"></iframe> -->
+      </div>
+
+</body>
+</html>
